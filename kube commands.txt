@@ -1,0 +1,78 @@
+// get all resources
+kubectl get all
+
+// get more details
+kubectl get pods -o wide
+
+// generate yaml with dry-run
+kubectl run redis --image=redis --dry-run=client -o yaml
+// save to file
+kubectl run redis --image=redis --dry-run=client -o yaml > redis.yml
+
+// create pod from file
+kubectl create -f redis.yml
+
+// specify a port on container when running a pod
+kubectl run nginx --image=nginx --poer=8080
+
+// apply changes from a yml file
+kubectl apply -f redis.yml
+
+// extract yml from a pod
+kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+
+// edit a pod (not everything is editable)
+kubectl edit pod <pod-name>
+
+// get replicaset
+kubectl get replicaset
+kubectl get rs
+
+// get replicaset yaml
+kubectl get replicaset new-replica-set -o yaml > replica.yaml
+
+// edit replicaset
+kubectl edit rs <rs-name>
+
+// delete replicaset
+kubectl delete replicaset <replicaset-name>
+
+// replace replicaset configs from file
+kubectl replace -f replicaset-definition.yml
+
+// scale replicaset manually
+kubectl scale --replicas=6 -f <file-name>
+kubectl scale --replicas=6 replicaset <replicaset-name>
+
+// get deployments
+kubectl get deployments
+kubectl get deploy
+
+// create deployment
+kubectl create -f deployment.yml
+kubectl create deployment nginx --image=nignx --replicas=3
+
+// scale deployment
+kubectl scale deployment nginx --replicas=4
+
+// create namespace
+kubectl create -f namespace.yml
+kubectl create namespace <name>
+
+// set default namespace
+kubectl config set-context $(kubectl config current-context) --namespace=<name>
+
+// get resource in namespace
+kubectl get pods --namespace=dev
+kubectl get pods --all-namespaces or kubectl get pods -A
+
+// get services
+kubectl get service
+kubectl get svc
+
+// create a clusterIP service along with the pod (needs the port)
+kubectl run nginx --image=nignx --port=80 --expose=true
+
+// create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes:
+kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080
