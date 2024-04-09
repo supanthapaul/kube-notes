@@ -76,3 +76,14 @@ kubectl run nginx --image=nignx --port=80 --expose=true
 // create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes:
 kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort
 kubectl create service nodeport nginx --tcp=80:80 --node-port=30080
+
+// create configmap
+kubectl create -f configmap.yml 
+kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
+kubectl create configmap my-config --from-env-file=path/to/foo.env
+kubectl create configmap my-config --from-file=path/to/bar
+
+// get and describe configmaps
+kubectl get configmaps
+kubectl describe configmaps
+kubectl describe configmap my-config
