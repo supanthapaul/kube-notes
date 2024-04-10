@@ -8,6 +8,8 @@ spec:
   containers:
   - name: nginx-container
     image: nginx
+    command: ["sleep"] # equivalent to ENTRYPOINT in docker
+    args: ["5000"] # equivalent to CMD in docker
     ports:
       - containerPort: 8080
     env:
@@ -21,3 +23,5 @@ spec:
     envFrom:
       - configMapRef:
           name: myapp-config
+      - secretRef:
+          name: myapp-secret

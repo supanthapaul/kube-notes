@@ -73,6 +73,12 @@ kubectl get svc
 // create a clusterIP service along with the pod (needs the port)
 kubectl run nginx --image=nignx --port=80 --expose=true
 
+// Start a pod using the default command, but use custom arguments (arg1 .. argN) for that command
+  kubectl run nginx --image=nginx -- <arg1> <arg2> ... <argN>
+  
+// Start the pod using a different command and custom arguments
+kubectl run nginx --image=nginx --command -- <new-cmd> <arg1> ... <argN>
+
 // create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes:
 kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort
 kubectl create service nodeport nginx --tcp=80:80 --node-port=30080
@@ -87,3 +93,17 @@ kubectl create configmap my-config --from-file=path/to/bar
 kubectl get configmaps
 kubectl describe configmaps
 kubectl describe configmap my-config
+
+// create secret
+kubectl create -f secret.yml 
+kubectl create secret generic my-secret --from-literal=key1=secret2 --from-literal=key2=secret2
+kubectl create secret generic my-secret --from-file=path/to/bar
+
+// get and describe secrets
+kubectl get secrets
+kubectl get secret my-secret -o yaml
+kubectl describe secrets
+
+// base64 encode decode
+echo -n 'secret' | base64
+echo -n 'c2VjcmV0' | base64 --decode

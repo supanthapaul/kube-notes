@@ -9,3 +9,5 @@ RUN pip install flask-mysql
 COPY . /opt/src/
 
 ENTRYPOINT FLASK_APP=/opt/src/app.py flask run
+
+CMD ["--color", "green"]
