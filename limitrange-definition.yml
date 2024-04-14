@@ -1,0 +1,21 @@
+# provides default request and limits to the pods in the namespace
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: resouce-constraint
+spec:
+  limits:
+    - default:
+        cpu: 500m
+        memory: 1G
+      defaultRequest:
+        cpu: 500m
+        memory: 1G
+      max:
+        cpu: 1
+        memory: 2G
+      min: 
+        cpu: 100m
+        memory: 256M
+      type: Container
+

@@ -10,6 +10,13 @@ spec:
     image: nginx
     command: ["sleep"] # equivalent to ENTRYPOINT in docker
     args: ["5000"] # equivalent to CMD in docker
+    resources:
+      limits:
+        cpu: "2"
+        memory: 1Gi
+      requests:
+        cpu: "1"
+        memory: 500Mi
     ports:
       - containerPort: 8080
     env:
