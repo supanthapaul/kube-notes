@@ -107,3 +107,13 @@ kubectl describe secrets
 // base64 encode decode
 echo -n 'secret' | base64
 echo -n 'c2VjcmV0' | base64 --decode
+
+// get service accounts
+kubectl get serviceaccounts
+kubectl describe serviceaccount <name>
+
+// create serviceaccount
+kubectl create serviceaccount <name>
+
+// generate token for a serviceaccount
+kubectl create token <sa-name>

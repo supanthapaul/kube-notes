@@ -5,6 +5,7 @@ metadata:
   labels:
     name: myapp
 spec:
+  serviceAccountName: build-robot # assign this service account to this pod
   containers:
   - name: nginx-container
     image: nginx
