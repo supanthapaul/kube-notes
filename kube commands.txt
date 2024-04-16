@@ -117,3 +117,14 @@ kubectl create serviceaccount <name>
 
 // generate token for a serviceaccount
 kubectl create token <sa-name>
+
+// Taint a node
+kubectl taint nodes <node-name> key=value:<taint-effect> 						# taint effect: what to do with the pods that can't "tolerate" this
+// Taint effects: NoSchedule | PreferNoSchedule | NoExecute
+kubectl taint nodes my-node app=blue:NoSchedule
+
+// untaint a node (add a - suffix)
+kubectl taint nodes my-node app=blue:NoSchedule-
+
+// get taints of a node
+kubectl describe nodes <node-name> | grep Taints

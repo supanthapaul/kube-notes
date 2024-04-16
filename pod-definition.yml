@@ -6,6 +6,11 @@ metadata:
     name: myapp
 spec:
   serviceAccountName: build-robot # assign this service account to this pod
+  tolerations:  # This pod will "tolerate" this taint on a node: app=blue:NoSchedule
+    - key: "app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
   containers:
   - name: nginx-container
     image: nginx
