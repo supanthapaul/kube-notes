@@ -128,3 +128,9 @@ kubectl taint nodes my-node app=blue:NoSchedule-
 
 // get taints of a node
 kubectl describe nodes <node-name> | grep Taints
+
+// label a node
+kubectl label nodes <node-name> key1=value1
+
+// show nodes with labels
+kubectl get nodes --show-labels

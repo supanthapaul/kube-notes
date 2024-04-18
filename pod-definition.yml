@@ -38,3 +38,15 @@ spec:
           name: myapp-config
       - secretRef:
           name: myapp-secret
+  nodeSelector:
+    size: Large # this pod will be deployed to the node with label size=Large
+  affinity:
+    nodeAffinity:  # node affinity is like node selectors but with ability to use complex expressions 
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In
+            values:  # this pod will be deployed to the node with label size=Large OR Medium
+            - Large
+            - Medium
