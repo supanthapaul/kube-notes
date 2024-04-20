@@ -38,6 +38,23 @@ spec:
           name: myapp-config
       - secretRef:
           name: myapp-secret
+    readinessProbe:  # readiness probes to change when the container status should be changed to "READY"
+      httpGet:
+        path: /api/ready
+        port: 8080
+      # tcpSocket:
+      #   port: 3306
+      # exec:
+      #   command:
+      #     - cat
+      #     - /app/is_ready
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      failureThreshold: 5
+    livenessProbe:  # to override the default behaviour of defining when the container is 'healthy', configured similarly like readiness
+      httpGet:
+        path: /api/healthy
+        port: 8080
   nodeSelector:
     size: Large # this pod will be deployed to the node with label size=Large
   affinity:

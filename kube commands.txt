@@ -134,3 +134,13 @@ kubectl label nodes <node-name> key1=value1
 
 // show nodes with labels
 kubectl get nodes --show-labels
+
+// add metrics-server through minikube
+minikube addons enable metrics-server
+// for other kubernetes environments you need to clone the metrics-sever git repo
+
+// view performance metrics of nodes
+kubectl top node
+
+// view performance metrics of pods
+kubectl top pod
