@@ -4,6 +4,8 @@ metadata:
   name: myapp-pod
   labels:
     name: myapp
+  annotations:  # annotations are only for information
+    buildversion: "1.34"
 spec:
   serviceAccountName: build-robot # assign this service account to this pod
   tolerations:  # This pod will "tolerate" this taint on a node: app=blue:NoSchedule

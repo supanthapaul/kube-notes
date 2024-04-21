@@ -4,6 +4,10 @@ kubectl get all
 // get more details
 kubectl get pods -o wide
 
+// get resource with a label
+kubectl get pods --selector app=frontend
+kubectl get all --selector bu=finance,env=prod,tier=frontend
+
 // generate yaml with dry-run
 kubectl run redis --image=redis --dry-run=client -o yaml
 // save to file
