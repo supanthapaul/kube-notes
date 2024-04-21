@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: reporting-cron-job
+spec:
+  schedule: "* * * * *"   # cron expression
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: reporting-tool
+            image: reporting-tool
+          restartPolicy: OnFailure

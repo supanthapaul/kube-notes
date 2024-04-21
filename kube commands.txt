@@ -169,3 +169,23 @@ kubectl rollout undo deployment/my-deployment --to-revision=1
 
 //use the --record flag to save the command used to create/update a deployment against the revision number
 kubectl set image deployment nginx nginx=nginx:1.17 --record
+
+// create job or cronjob from definition file
+kubectl create -f job-definition.yml
+
+// Create a job
+kubectl create job my-job --image=busybox
+
+// Create a job with a command
+kubectl create job my-job --image=busybox -- date
+
+// Create a job from a cron job named "a-cronjob"
+kubectl create job test-job --from=cronjob/a-cronjob
+
+// get jobs and cronjob
+kubectl get jobs
+kubectl get cronjob
+
+// delete job and cronjob
+kubectl delete job <name>
+kubectl delete cronjob <name>
