@@ -56,6 +56,9 @@ kubectl get deploy
 kubectl create -f deployment.yml
 kubectl create deployment nginx --image=nignx --replicas=3
 
+// set/update version of an image in deployment
+kubectl set image deployment/my-deployment nginx=nignx:1.9.1
+
 // scale deployment
 kubectl scale deployment nginx --replicas=4
 
@@ -148,3 +151,21 @@ kubectl top node
 
 // view performance metrics of pods
 kubectl top pod
+
+// get rollout status of a deployment
+kubectl rollout status deployment/my-deployment
+
+// get rollout history of a deployment
+kubectl rollout history deployment/my-deployment
+
+// check the status of each revision individually by using the --revision flag
+kubectl rollout history deployment nginx --revision=1
+
+// rollback a deployment to a previous revision
+kubectl rollout undo deployment/my-deployment
+
+// To rollback to specific revision we will use the --to-revision flag
+kubectl rollout undo deployment/my-deployment --to-revision=1
+
+//use the --record flag to save the command used to create/update a deployment against the revision number
+kubectl set image deployment nginx nginx=nginx:1.17 --record

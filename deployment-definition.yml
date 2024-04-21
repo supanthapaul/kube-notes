@@ -6,6 +6,11 @@ metadata:
     app: myapp
     type: front-end
 spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate   # deployment strategy is rolling update by default
   template:
     metadata:
       name: myapp-pod
