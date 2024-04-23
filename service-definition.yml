@@ -3,7 +3,10 @@ kind: Service
 metadata:
   name: myapp
 spec:
+  type: NodePort  # other types: ClusterIP | LoadBalancer
   selector:
     name: myapp
   ports:
-  - port: 8080
+  - targetPort: 80    # port on the pod 
+    port: 80    # port on the service, if targetPort is not assigned: targetPort=port
+    nodePort: 30000   # port on the node to expose, valid range: 30000 - 32767
