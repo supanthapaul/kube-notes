@@ -189,3 +189,12 @@ kubectl get cronjob
 // delete job and cronjob
 kubectl delete job <name>
 kubectl delete cronjob <name>
+
+// get persistent volumes
+kubectl get persistentvolume
+
+// get PVCs
+kubectl get persistentvolumeclaim
+
+// delete PVC
+kubectl delete persistentvolumeclaim mypvc

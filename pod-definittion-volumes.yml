@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args: ["shuf -i 0-100 -n 1 >> /opt/number.out;"]
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+    - mountPath: /opt   # mounts the data-volume defined below to the Pod's path /opt
+      name: data-volume
+    - mountPath: /mypd
+      name: mypd
+  volumes:
+  - name: data-volume
+    hostPath:
+      path: /data    # Uses a directory on the host/node as the volume, not recommended for multi-ndoe setup since the contents will be different accross diff nodes
+      type: Directory
+  - name: mypd
+    persistentVolumeClaim:    # Uses a PVC as volume
+      claimName: mypvc
