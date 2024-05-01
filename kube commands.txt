@@ -198,3 +198,12 @@ kubectl get persistentvolumeclaim
 
 // delete PVC
 kubectl delete persistentvolumeclaim mypvc
+
+// view kube config
+kubectl config view
+
+// change the context of kube config
+kubectl config use-context prod-user@production
+
+// provide custom config file while switching context
+kubectl config use-context prod-user@production --kubeconfig /root/myconfig
