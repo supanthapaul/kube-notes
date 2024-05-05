@@ -105,6 +105,7 @@ kubectl describe configmap my-config
 kubectl create -f secret.yml 
 kubectl create secret generic my-secret --from-literal=key1=secret2 --from-literal=key2=secret2
 kubectl create secret generic my-secret --from-file=path/to/bar
+kubectl create secret tls  webhook-server-tls --namespace=webhook-demo  --cert=/keys/webhook-server-tls.crt --key=/keys/webhook-server-tls.key
 
 // get and describe secrets
 kubectl get secrets
@@ -222,3 +223,22 @@ kubectl auth can-i create deployments
 // check access for other users (for administrators only)
 kubectl auth can-i create deployments --as dev-user
 kubectl auth can-i create deployments --as dev-user --namespace
+
+// view enabled admission controllers by default
+kube-apiserver -h | grep enable-admission-plugins
+// where kube-apiserver isn't available directly
+kubectl exec -it kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins 
+
+// kube api-server manifest file
+/etc/kubernetes/manifests/kube-apiserver.yaml
+
+//Since the kube-apiserver is running as pod you can check the process to see enabled and disabled plugins.
+ps -ef | grep kube-apiserver | grep admission-plugins
+
+// convert a yaml resource version to another (may not be available, separete plugin)
+kubectl convert -f nginx.yml --output-version apps/v1
+
+// start a kubernetes proxy server on port
+kubectl proxy 8001
+// run on background
+kubectl proxy 8001&
