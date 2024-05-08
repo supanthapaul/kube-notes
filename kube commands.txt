@@ -242,3 +242,34 @@ kubectl convert -f nginx.yml --output-version apps/v1
 kubectl proxy 8001
 // run on background
 kubectl proxy 8001&
+
+// get name of the OS installed
+cat /etc/*release*
+
+// Helm charts
+Chart = templates + values
+template = kubernetes resource files with variables for the properties that we wanna controll through Helm
+values.yml = values for all the variables used in the templates
+
+// search Helm hub for charts/packages
+helm search hub <name>
+
+// add a new chart repository
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+// search in the added repos
+helm search repo <name>
+
+// list repos
+helm repo list
+
+// install/deploy a chart
+helm install <release-name> <chart-name>
+helm install release-1 wordpress
+
+// list and delete installed charts
+helm list
+helm uninstall <release-name>
+
+// only download the chart but don't deploy it
+helm pull --untar bitnami/wordpress
