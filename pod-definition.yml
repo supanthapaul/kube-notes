@@ -17,6 +17,7 @@ spec:
   - name: nginx-container
     image: nginx
     command: ["sleep"] # equivalent to ENTRYPOINT in docker
+    # command: ["/bin/sh", "-c", "<command>"]  use /bin/sh before executing a shell command
     args: ["5000"] # equivalent to CMD in docker
     resources:
       limits:

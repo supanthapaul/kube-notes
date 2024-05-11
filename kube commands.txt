@@ -17,7 +17,7 @@ kubectl run redis --image=redis --dry-run=client -o yaml > redis.yml
 kubectl create -f redis.yml
 
 // specify a port on container when running a pod
-kubectl run nginx --image=nginx --poer=8080
+kubectl run nginx --image=nginx --port=8080
 
 // apply changes from a yml file
 kubectl apply -f redis.yml
@@ -273,3 +273,7 @@ helm uninstall <release-name>
 
 // only download the chart but don't deploy it
 helm pull --untar bitnami/wordpress
+
+// check connection of one pod to another
+kubectl exec -it <pod-name> -- sh
+nc -v -z -w 2 <another-pod-service> <port>
