@@ -23,6 +23,7 @@ spec:
   - name: data-volume
     hostPath:
       path: /data    # Uses a directory on the host/node as the volume, not recommended for multi-ndoe setup since the contents will be different accross diff nodes
+      readOnly: true # makes the volume read-only
       type: Directory
   - name: mypd
     persistentVolumeClaim:    # Uses a PVC as volume

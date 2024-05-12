@@ -6,6 +6,9 @@ spec:
   schedule: "* * * * *"   # cron expression
   jobTemplate:
     spec:
+      completions: 1
+      backoffLimit: 25
+      activeDeadlineSeconds: 20 # if the task isn't completed in 20 secs, the job will fail and pods will be terminated
       template:
         spec:
           containers:

@@ -58,6 +58,7 @@ spec:
       httpGet:
         path: /api/healthy
         port: 8080
+  nodeName: controlplane # this pod will be deployed to the node with name controlplane
   nodeSelector:
     size: Large # this pod will be deployed to the node with label size=Large
   affinity:
