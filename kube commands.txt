@@ -87,7 +87,7 @@ kubectl run nginx --image=nignx --port=80 --expose=true
 kubectl run nginx --image=nginx --command -- <new-cmd> <arg1> ... <argN>
 
 // create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes:
-kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort
+kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort 		// pipe it to a file and add nodePort property
 kubectl create service nodeport nginx --tcp=80:80 --node-port=30080
 
 // create configmap
@@ -170,6 +170,10 @@ kubectl rollout undo deployment/my-deployment --to-revision=1
 
 //use the --record flag to save the command used to create/update a deployment against the revision number
 kubectl set image deployment nginx nginx=nginx:1.17 --record
+
+// create ingress with imperative command
+kubectl create ingress <name> --rule="<host>/<path>*=<service-name>:<port>"
+kubectl create ingress myingress --rule="my-host.com/video*=my-video-service:8080"
 
 // create job or cronjob from definition file
 kubectl create -f job-definition.yml
