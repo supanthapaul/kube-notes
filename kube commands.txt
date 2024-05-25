@@ -28,6 +28,16 @@ kubectl get pod <pod-name> -o yaml > pod-definition.yaml
 // edit a pod (not everything is editable)
 kubectl edit pod <pod-name>
 
+// if pod restarted/crashed get logs of previous instance
+kubectl logs nginx -p
+kubectl logs nginx --previous
+
+// change/override a label of the pod
+kubectl label po nginx2 app=v2 --overwrite
+
+// annotate a pod with label app=v2
+kubectl annotate po -l "app=v2" owner=marketing
+
 // get replicaset
 kubectl get replicaset
 kubectl get rs
@@ -58,6 +68,9 @@ kubectl create deployment nginx --image=nignx --replicas=3
 
 // set/update version of an image in deployment
 kubectl set image deployment/my-deployment nginx=nignx:1.9.1
+
+// create autoscaler for deployment
+kubectl autoscale deploy nginx --min=5 --max=10 --cpu-percent=80
 
 // scale deployment
 kubectl scale deployment nginx --replicas=4
@@ -203,6 +216,9 @@ kubectl get persistentvolumeclaim
 
 // delete PVC
 kubectl delete persistentvolumeclaim mypvc
+
+// create resource quota imperatively
+kubectl create quota myrq --hard=cpu=1,memory=1G,pods=2 
 
 // view kube config
 kubectl config view
